@@ -26,6 +26,16 @@ struct ContentView: View {
             return amountPerPerson
         }
         
+        var tipValue: Double {
+            let peopleCount = Double(numberOfPeople+2)
+            let tipPercentage = Double(tipPercentage)
+            
+            let tipValue = checkAmount / 100 * tipPercentage
+
+            
+            return tipValue
+        }
+        
         NavigationStack{
             Form{
                 Section{
@@ -48,8 +58,14 @@ struct ContentView: View {
                     }
                     .pickerStyle(.segmented)
                 }
-                Section{
+                Section("Total Amount"){
+                    Text(checkAmount, format: .currency(code:
+                                                            Locale.current.currency?.identifier ?? "USD"))
+                    Text(tipValue, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                }
+                Section("Amount per person:"){
                     Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    
                 }
             }
             
